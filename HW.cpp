@@ -2,6 +2,8 @@
 #include<algorithm>
 using namespace std;
 string ArrayStr[500];
+int Count_Value=0;
+
 //keyword={"auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"}
 string Keywords[]={"auto","break","case","char","const","continue","default",
 							"do","else","enum","extern","for","goto",
@@ -21,6 +23,9 @@ string Variable[]={"a","b","Answer","Ans"};
 
 string Constant[]={"0","1","2","3","4","5","6","7","8","9"};
 
+string Built_it[1000];
+int Builtin=0;
+
 vector<string> Keywords_;
 vector<string> symbols_;
 vector<string> operator_;
@@ -28,7 +33,7 @@ vector<string> DataType_;
 vector<string> Variable_;
 vector<string> Constant_;
 
-int Count_Value=0;
+
 
 
 void KeepString(string str){
@@ -154,30 +159,43 @@ void symbolTable(){
     cout<<"Datatype: ";
     for (string i : DataType_) {
        cout << i <<"  ";
+       Built_it[Builtin]=i;
+       Builtin++;
+
     }
    cout<<"\nVariable: ";
    for(string i :Variable_) {
        cout << i <<"  ";
+       Built_it[Builtin]=i;
+       Builtin++;
     }
     cout<<"\nKeyword: ";
     for (string i : Keywords_) {
        cout << i <<"  ";
+       Built_it[Builtin]=i;
+       Builtin++;
     }
     cout<<"\nSymbol: ";
     for (string i : symbols_) {
        cout << i <<"  ";
+       Built_it[Builtin]=i;
+       Builtin++;
     }
     cout<<"\nOperators: ";
     for (string i : operator_) {
        cout << i <<"  ";
+       Built_it[Builtin]=i;
+       Builtin++;
     }
     cout<<"\nConstant: ";
     for (string i : Constant_) {
        cout << i <<"  ";
+       Built_it[Builtin]=i;
+       Builtin++;
     }
 }
 
-void FindError(string str,string Allstr){
+void FindError(string str){
     cout<<"\n\n\nHere Will be finded error"<<endl;
    // cout<<"\nString with space"<<str<<endl;
    // cout<<"\nString without space"<<Allstr<<endl;
@@ -188,23 +206,23 @@ void FindError(string str,string Allstr){
    int Bracket_1=0;
    int Bracket_2=0;
 
-   for(int i=0;i<Allstr.length();i++){
-     if(Allstr[i]=='('){
+   for(int i=0;i<str.length();i++){
+     if(str[i]=='('){
         Parentheses_1++;
      } 
-     if(Allstr[i]==')'){
+     if(str[i]==')'){
         Parentheses_2++;
      }  
-     if(Allstr[i]=='{'){
+     if(str[i]=='{'){
         Braces_1++;
      }  
-     if(Allstr[i]=='}'){
+     if(str[i]=='}'){
         Braces_2++;
      }  
-     if(Allstr[i]=='['){
+     if(str[i]=='['){
         Bracket_1++;
      }  
-     if(Allstr[i]==']'){
+     if(str[i]==']'){
         Bracket_2++;
      }   
 
@@ -229,8 +247,65 @@ void FindError(string str,string Allstr){
 
 
      ///=================================//
+     int Milche=0;
+   int Help_Error=0;
+   int Error=0;
     int count=0;
     int FindError=0;
+     cout<<"All Word May be: ";
+    for(int i=0;i<Count_Value;i++){       //something right
+     cout<<"ArrayStr["<<i<<"]: "<<ArrayStr[i]<<endl;
+       if(ArrayStr[i]=="\""){
+            count++;
+            continue;
+        }
+        
+        if(count==0 || count%2==0){
+            //=================
+           
+            Milche=0;
+            for(int j=0;j<Builtin;j++){ 
+                if(ArrayStr[i]==Built_it[j]){
+                  Milche++;
+                  cout<<"Konta Milche: "<<ArrayStr[i]<<endl;
+                }
+            }
+
+            if(Milche==0){
+                cout<<"Konta Milenai: "<<ArrayStr[i]<<endl;
+                string HelpString=ArrayStr[i];
+               if(HelpString=="main()" || HelpString==" " || HelpString =="" || HelpString[0]==' '){
+                  cout<<"Jeta Mile Nai: "<<HelpString<<endl;
+               }else{
+                   Error++;
+                    cout<<"Jeta Unconditional: "<<HelpString<<endl;
+               }
+            }
+
+            
+
+            //===================
+        }
+    }
+
+    if(Error>0){
+      cout<<"There have error"<<endl;
+      cout<<"Error: "<<Error<<endl;
+    }else{
+      cout<<"No Error"<<endl;
+    }
+
+
+    cout<<"\nAllBuiltin: "<<endl;
+    for(int i=0;i<Builtin;i++){
+      cout<<Built_it[i]<<" ";
+    }
+
+    cout<<"\n\n All ArrauStr[]: "<<endl;
+    for(int i=0;i<Count_Value;i++){
+       cout<<i<<". "<<ArrayStr[i]<<endl;
+    }
+   
 
 }
 
@@ -256,12 +331,12 @@ int main(){
 
     ///All Word and Symble keep in one Array String
     ///Here will be create Symbol Table:
-    KeepString(NewString);
+    
     string ErrorString=NewString;
 
     //Remove Space between two words
-    NewString.erase(remove(NewString.begin(), NewString.end(), ' '), NewString.end());
-    cout<<"\nNew String without space: \n"<<NewString<<endl;
+   // NewString.erase(remove(NewString.begin(), NewString.end(), ' '), NewString.end());
+    //cout<<"\nNew String without space: \n"<<NewString<<endl;
 
     //Remove /* */ Comment 
     int Check=0;
@@ -287,9 +362,9 @@ int main(){
      }
 
     cout<<"\nWithout /* */ Comment: =========\n"<<NewString<<endl;
-    
+    KeepString(NewString);
     symbolTable();
-    FindError(ErrorString,NewString);
+    FindError(NewString);
 
     return 0;
     
