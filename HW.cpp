@@ -13,7 +13,7 @@ string Keywords[]={"auto","break","case","char","const","continue","default",
 
 
 
-string symbols[]={"\t","\n",";",":","<>","(",")","{","}","[","]","\""};
+string symbols[]={"\t","\n",";",":","<>","(",")","{","}","[","]","\"",","};
 
 string operators[]={"+","-","*","/","==","!=","<",">","<=",">=","<=>","<<",">>","="};
 
@@ -90,7 +90,7 @@ void KeepString(string str){
       }
 
        //Check Symbol
-      for(int s=0;s<12;s++){
+      for(int s=0;s<13;s++){
         if(ArrayStr[i]==symbols[s]){
             symbols_.push_back(ArrayStr[i]);
            // cout<<" is a Symbol"<<endl;
@@ -274,7 +274,7 @@ void FindError(string str){
             if(Milche==0){
                 cout<<"Konta Milenai: "<<ArrayStr[i]<<endl;
                 string HelpString=ArrayStr[i];
-               if(HelpString=="main()" || HelpString==" " || HelpString =="" || HelpString[0]==' '){
+               if(HelpString=="main()" || HelpString==" " || HelpString =="" ){
                   cout<<"Jeta Mile Nai: "<<HelpString<<endl;
                }else{
                    Error++;

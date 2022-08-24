@@ -1,0 +1,12 @@
+int main() {   //This is double slash
+    int a , b ;   ///This treple Slash Comment 
+    double Ans ;
+    cout << " Input value of // A : " ; //Tri-Slsh
+    cin >> a ; 
+    cout << " Input Value of B : " ;
+    cin >> b ;
+    Ans = a / ( double ) b ;   /*Find out quotient*/
+    cout << " Answer: /* Dekha Jak*/ " << Ans << endl ; /*Next quotient*/
+    return 0 ;
+ }
+
