@@ -193,6 +193,57 @@ void symbolTable(){
        Built_it[Builtin]=i;
        Builtin++;
     }
+
+
+    ///Show in Table
+    cout<<"Symbol Table:"<<endl;
+    cout<<"========================================================================================"<<endl;
+    cout<<"Data Type\tVariable\tKeyword\t\tSymbol\t\tOperaator\tConstant"<<endl;
+    for(int i=0; i < symbols_.size(); i++){
+      //DataType
+      if(i>=DataType_.size()){
+         cout<<"|| "<<"\t\t";
+      }else{
+         cout<<"|"<<DataType_.at(i)<<"\t\t";
+      }
+
+      //VAriable
+      if(i>=Variable_.size()){
+         cout<<" "<<"\t\t";
+      }else{
+         cout<<Variable_.at(i)<<"\t\t";
+      }
+
+      //Keyword
+      if(i>=Keywords_.size()){
+         cout<<" "<<"\t\t";
+      }else{
+         cout<<Keywords_.at(i)<<"\t\t";
+      }
+
+      //Symbol
+      if(i>=symbols_.size()){
+         cout<<" "<<"\t\t";
+      }else{
+         cout<<symbols_.at(i)<<"\t\t";
+      }
+
+      //Operator
+      if(i>=operator_.size()){
+         cout<<" "<<"\t\t";
+      }else{
+         cout<<operator_.at(i)<<"\t\t";
+      }
+
+      //Constant
+      if(i>=Constant_.size()){
+         cout<<" ||"<<endl;;
+      }else{
+         cout<<Constant_.at(i)<<"||"<<endl;
+      }
+      
+    }
+   cout<<"========================================================================================"<<endl;
 }
 
 void FindError(string str){
@@ -243,18 +294,18 @@ void FindError(string str){
         cout<<"Here obtain Bracket error ->[]"<<endl;
      }
 
-     cout<<"\""<<endl;
+    // cout<<"\""<<endl;
 
 
      ///=================================//
-     int Milche=0;
-   int Help_Error=0;
-   int Error=0;
+    int Milche=0;
+    int Help_Error=0;
+    int Error=0;
     int count=0;
     int FindError=0;
-     cout<<"All Word May be: ";
+  //   cout<<"All Word May be: ";
     for(int i=0;i<Count_Value;i++){       //something right
-     cout<<"ArrayStr["<<i<<"]: "<<ArrayStr[i]<<endl;
+    cout<<"ArrayStr["<<i<<"]: "<<ArrayStr[i]<<endl;
        if(ArrayStr[i]=="\""){
             count++;
             continue;
@@ -267,18 +318,18 @@ void FindError(string str){
             for(int j=0;j<Builtin;j++){ 
                 if(ArrayStr[i]==Built_it[j]){
                   Milche++;
-                  cout<<"Konta Milche: "<<ArrayStr[i]<<endl;
+                 cout<<"Konta Milche: "<<ArrayStr[i]<<endl;
                 }
             }
 
             if(Milche==0){
-                cout<<"Konta Milenai: "<<ArrayStr[i]<<endl;
+               cout<<"Konta Milenai: "<<ArrayStr[i]<<endl;
                 string HelpString=ArrayStr[i];
                if(HelpString=="main()" || HelpString==" " || HelpString =="" ){
-                  cout<<"Jeta Mile Nai: "<<HelpString<<endl;
+                 cout<<"Jeta Mile Nai: "<<HelpString<<endl;
                }else{
                    Error++;
-                    cout<<"Jeta Unconditional: "<<HelpString<<endl;
+                   cout<<"Jeta Unconditional: "<<HelpString<<endl;
                }
             }
 
@@ -298,12 +349,12 @@ void FindError(string str){
 
     cout<<"\nAllBuiltin: "<<endl;
     for(int i=0;i<Builtin;i++){
-      cout<<Built_it[i]<<" ";
+     //// cout<<Built_it[i]<<" ";
     }
 
     cout<<"\n\n All ArrauStr[]: "<<endl;
     for(int i=0;i<Count_Value;i++){
-       cout<<i<<". "<<ArrayStr[i]<<endl;
+     ////  cout<<i<<". "<<ArrayStr[i]<<endl;
     }
    
 
