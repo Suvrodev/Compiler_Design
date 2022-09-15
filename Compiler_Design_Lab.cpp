@@ -32,6 +32,13 @@ vector<string> DataType_;
 vector<string> Variable_;
 vector<string> Constant_;
 
+set<string> Keywords_s;
+set<string> symbols_s;
+set<string> operator_s;
+set<string> DataType_s;
+set<string> Variable_s;
+set<string> Constant_s;
+
 void KeepString(string str)
 {
    /// Keep Every word in a string array
@@ -62,7 +69,7 @@ void KeepString(string str)
          if (ArrayStr[i] == DataType[d])
          {
 
-            DataType_.push_back(ArrayStr[i]);
+            DataType_s.insert(ArrayStr[i]);
             // cout<<" is a DataType"<<endl;
          }
       }
@@ -72,7 +79,7 @@ void KeepString(string str)
       {
          if (ArrayStr[i] == operators[o])
          {
-            operator_.push_back(ArrayStr[i]);
+            operator_s.insert(ArrayStr[i]);
             // cout<<" is a Operator"<<endl;
          }
       }
@@ -82,7 +89,7 @@ void KeepString(string str)
       {
          if (ArrayStr[i] == Variable[v])
          {
-            Variable_.push_back(ArrayStr[i]);
+            Variable_s.insert(ArrayStr[i]);
             // cout<<" is a Variable"<<endl;
          }
       }
@@ -92,7 +99,7 @@ void KeepString(string str)
       {
          if (ArrayStr[i] == symbols[s])
          {
-            symbols_.push_back(ArrayStr[i]);
+            symbols_s.insert(ArrayStr[i]);
             // cout<<" is a Symbol"<<endl;
          }
       }
@@ -102,7 +109,7 @@ void KeepString(string str)
       {
          if (ArrayStr[i] == Keywords[k])
          {
-            Keywords_.push_back(ArrayStr[i]);
+            Keywords_s.insert(ArrayStr[i]);
             // cout<<" is a Keyword"<<endl;
          }
       }
@@ -112,7 +119,7 @@ void KeepString(string str)
       {
          if (ArrayStr[i] == Constant[c])
          {
-            Constant_.push_back(ArrayStr[i]);
+            Constant_s.insert(ArrayStr[i]);
          }
       }
    }
@@ -147,66 +154,59 @@ string RemoveDoubleSlashComment(string Text)
 void symbolTable()
 {
    cout << "\n\n\n\nSymbol Table:" << endl;
-   // cout<<"Keyword\t\t\tSymbol\tOperator\tDatatype\tVariable"<<endl;
-
-   //  for (auto i =symbols_.begin(); i != symbols_.end(); ++i){
-   //     cout << *i <<endl;
-   //  }
-
-   //  for (string i : Keywords_,symbols_) {
-   //    cout << i << endl;
-   // }
-
-   // for(int k=0,s=0,o=0,d=0,v=0; k < Keywords_.size(),s<symbols_.size(),o<operator_.size(),d<DataType_.size(),v<Variable_.size(); k++,s++,o++,d++,v++){
-   //     cout << Keywords_.at(k)<<"\t\t\t"<<symbols_.at(s)<<"\t"<<operator_.at(o)<<"\t\t"<<DataType_.at(d)<<"\t\t"<<Variable_.at(v) <<endl;
-   // }
-
-   // for(int i=0; i<symbols_.size();i++){
-   //     cout <<symbols_.at(i)<<"\t\t"<< Keywords_.at(i)<<"\t\t\t"<<symbols_.at(i)<<"\t"<<operator_.at(i)<<"\t\t"<<DataType_.at(i)<<"\t\t"<<Variable_.at(i) <<endl;
-   // }
+  
 
    cout << "Datatype: ";
-   for (string i : DataType_)
+   for (auto itr=DataType_s.begin();itr!=DataType_s.end();itr++)
    {
-      cout << i << "  ";
-      Built_it[Builtin] = i;
+      cout << *itr << "  ";
+      Built_it[Builtin] = *itr;
+      DataType_.push_back(*itr);
       Builtin++;
    }
    cout << "\nVariable: ";
-   for (string i : Variable_)
+   for (auto itr=Variable_s.begin();itr!=Variable_s.end();itr++)
    {
-      cout << i << "  ";
-      Built_it[Builtin] = i;
+      cout << *itr << "  ";
+      Built_it[Builtin] = *itr;
+      Variable_.push_back(*itr);
       Builtin++;
    }
    cout << "\nKeyword: ";
-   for (string i : Keywords_)
+   for (auto itr=Keywords_s.begin();itr!=Keywords_s.end();itr++)
    {
-      cout << i << "  ";
-      Built_it[Builtin] = i;
+      cout << *itr << "  ";
+      Built_it[Builtin] = *itr;
+      Keywords_.push_back(*itr);
       Builtin++;
    }
+
    cout << "\nSymbol: ";
-   for (string i : symbols_)
+   for (auto itr=symbols_s.begin();itr!=symbols_s.end();itr++)
    {
-      cout << i << "  ";
-      Built_it[Builtin] = i;
+      cout << *itr << "  ";
+      Built_it[Builtin] = *itr;
+      symbols_.push_back(*itr);
       Builtin++;
    }
    cout << "\nOperators: ";
-   for (string i : operator_)
+   for (auto itr=operator_s.begin();itr!=operator_s.end();itr++)
    {
-      cout << i << "  ";
-      Built_it[Builtin] = i;
+      cout << *itr << "  ";
+      Built_it[Builtin] = *itr;
+      operator_.push_back(*itr);
       Builtin++;
    }
    cout << "\nConstant: ";
-   for (string i : Constant_)
+   for (auto itr=Constant_s.begin();itr!=Constant_s.end();itr++)
    {
-      cout << i << "  ";
-      Built_it[Builtin] = i;
+      cout << *itr << "  ";
+      Built_it[Builtin] = *itr;
+      Constant_.push_back(*itr);
       Builtin++;
    }
+
+
 
    /// Show in Table
    cout << "\nSymbol Table:" << endl;
